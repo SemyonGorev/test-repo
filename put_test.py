@@ -1,20 +1,21 @@
 import requests
+from Configs import API
 
 
 # Изменение проекта
 def test_put_project():
-    url = "https://ru.yougile.com/api-v2/" \
-        "projects/d201760c-0628-4688-9a7e-799691a2340b"
+    put_project = API()
+    url = put_project.base_url + put_project.id
     payload = {
         "deleted": False,
-        "title": "ГосУслуги",
+        "title": put_project.title,
         "users": {
-            "35e6960b-10a5-4018-a0c0-e0447c8487c8": "worker"
+            put_project.user: "worker"
                 }
                 }
     headers = {
-                "Content-Type": "application/json",
-                "Authorization": ""
+                "Content-Type": put_project.Content_Type,
+                "Authorization": put_project.auth
                 }
     response = requests.request("PUT", url, json=payload, headers=headers)
     print(response.text)

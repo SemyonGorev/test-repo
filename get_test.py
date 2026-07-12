@@ -1,13 +1,14 @@
 import requests
+from Configs import API
+
+
 # Получение проекта по id
-
-
 def test_get_project():
-    url = "https://ru.yougile.com/api-v2/projects/" \
-          "d201760c-0628-4688-9a7e-799691a2340b"
+    get_project = API()
+    url = get_project.base_url + get_project.id
     headers = {
-        "Content-Type": "application/json",
-        "Authorization": ""
+        "Content-Type": get_project.Content_Type,
+        "Authorization": get_project.auth
         }
     response = requests.request("GET", url, headers=headers)
     print(response.text)

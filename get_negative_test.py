@@ -1,13 +1,14 @@
 import requests
+from Configs import API
+
+
 # Получение проекта c неправильным id
-
-
 def test_get_negative():
-    url = "https://ru.yougile.com/api-v2/projects/x"
+    get_negative = API()
+    url = get_negative.base_url + "x"
     headers = {
-        "Content-Type": "application/json",
-        "Authorization":
-            ""
+        "Content-Type": get_negative.Content_Type,
+        "Authorization": get_negative.auth
             }
     response = requests.request("GET", url, headers=headers)
     print(response.text)

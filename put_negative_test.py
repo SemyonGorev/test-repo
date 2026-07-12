@@ -1,20 +1,21 @@
 import requests
+from Configs import API
 
 
 # Изменение имени проекта на пустое
 def test_put_negative():
-    url = "https://ru.yougile.com/api-v2/projects/" \
-        "d201760c-0628-4688-9a7e-799691a2340b"
+    put_negative = API()
+    url = put_negative.base_url + put_negative.id
     payload = {
         "deleted": False,
         "title": "",
         "users": {
-                "35e6960b-10a5-4018-a0c0-e0447c8487c8": "worker"
+                put_negative.user: "worker"
                 }
                 }
     headers = {
-                "Content-Type": "application/json",
-                "Authorization": ""
+                "Content-Type": put_negative.Content_Type,
+                "Authorization": put_negative.auth
                 }
     response = requests.request("PUT", url, json=payload, headers=headers)
     print(response.text)

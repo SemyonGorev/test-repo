@@ -1,20 +1,22 @@
 import requests
+from Configs import API
 
 
 # Создание проекта
 def test_post_project():
-    url = "https://ru.yougile.com/api-v2/projects"
+    post_project = API()
+    url = post_project.base_url
     payload = {
-        "title": "ГосУслуги",
+        "title": post_project.title,
         "users":
             {
-                "35e6960b-10a5-4018-a0c0-e0447c8487c8": "worker"
+                post_project.user: "worker"
             },
         "idempotencyKey": "string"
                 }
     headers = {
-                "Content-Type": "application/json",
-                "Authorization": ""
+                "Content-Type": post_project.Content_Type,
+                "Authorization": post_project.auth
                 }
     response = requests.request("POST", url, json=payload, headers=headers)
     print(response.text)
